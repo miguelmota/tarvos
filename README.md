@@ -2,11 +2,11 @@
 
 > Speech Assessment Machine Intelligence
 
-**Note!** This is currently an experimental project. Check out the [Roadmap](#Roadmap) for my goals with this project.
+**Note!** This is currently an experimental project. Check out the [Roadmap](#roadmap) for goals of this project.
 
 # Roadmap
 
-The ultimate goal of *SAMI* to achieve this idea of Voice Driven Interfaces (VDI) and Voice Driven User Experience (VDUX) in native web applications. Speech recognition is an extremly difficult problem to solve and W3C is already taking steps forward with the [Web Speech API](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html). The API is at it's early stages and currently only Chrome has implemented the [SpeechRecognition](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) standard. This is not ideal because it leaves other major browsers out of the picture, and the Chrome SpeechRecognition has to send the audio buffers over to their servers and return a response which causes another issue with latency and the user must be online for it to work. Fortunately, [Sylvain Chevalier](https://github.com/syl22-00) ported over the [CMU Sphinx](http://cmusphinx.sourceforge.net/) speech recognition library to JavaScript. With a little bit of manual work, this enable us the ability to incorporate speech recognition locally in the browser without having to rely on a third party, like Google. The only mandatory dependency we have is having support for [getUserMedia API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia) to grab the users audio stream.
+The ultimate goal of *SAMI* to achieve this idea of Voice Driven Interfaces (VDI) and Voice Driven User Experience (VDUX) in native web applications. Speech recognition is an extremly difficult problem to solve and W3C is already taking steps forward with the [Web Speech API](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html). The API is at it's early stages and currently only Chrome has implemented the [SpeechRecognition](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) standard. This is not ideal because it leaves other major browsers out of the picture, and the their API has to send the audio buffers over to their servers and return a response which causes another issue with latency and the user must be online for it to work. Fortunately, [Sylvain Chevalier](https://github.com/syl22-00) ported over the [CMU Sphinx](http://cmusphinx.sourceforge.net/) speech recognition library to JavaScript. With a little bit of manual work, this enable us the ability to incorporate speech recognition locally in the browser without having to rely on a third party, like Google. The only mandatory dependency we need is having support for the [getUserMedia API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia) to grab the users audio stream.
 
 Here are the long-term goals outlined.
 
@@ -20,6 +20,8 @@ Here are the long-term goals outlined.
 At the moment this is a simple wrapper for [PocketSphinx.js](https://github.com/syl22-00/pocketsphinx.js), which is a port of [CMU Pocket Sphinx](http://cmusphinx.sourceforge.net/) compiled to JavaScript with [emscripten](https://github.com/kripken/emscripten). First head over to [CMUSphinx Tutorial](http://cmusphinx.sourceforge.net/wiki/tutorial) and learn the concepts of phonetic dictionaries, grammars, and keywords in speech recognition.
 
 For retrieving word phonemes check out the [CMU Sphinx Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict). Here is a wrapper in node, [cmusphinxdict](https://github.com/miguelmota/node-cmusphinxdict).
+
+Below as example of using SAMI.
 
 ```javascript
 SAMI.config({
@@ -98,7 +100,6 @@ SAMI.on('hyp', function(hyp, isFinal) {
   var grammarIds = SAMI.getGrammarIds();
 
   if (hyp === 'OKAY SAMI') {
-    selectTag.querySelector('[value="'+grammarIds[0].id+'"]').selected = true;
     SAMI.stopListenening();
     SAMI.startListening(grammarIds[0].id);
   }
@@ -125,4 +126,4 @@ SAMI.on('error', function(error) {
 
 [PocketSphinx](https://github.com/syl22-00/pocketsphinx.js) is released under the MIT License.
 
-Everything else is released under the MIT License.
+SAMI is released under the MIT License.
