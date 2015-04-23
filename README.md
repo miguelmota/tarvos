@@ -13,7 +13,7 @@ Here are the long-term goals outlined.
 - Incorprate machine learning to attain Speaker Dependant Speech Recognition with the goal of yielding higher accuracy.
 - Create a command line tool to auto generate word lists and grammars based from learned corpora (bodies of text).
 - Crawl website to collect corpora and hyperlink information to auto generate grammars for navigation.
-- Add audible feedback, initiallly probably via [SpeechSynthesis Web API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+- Add audible feedback, initiallly probably via [SpeechSynthesis Web API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
 
 # Usage
 
@@ -124,6 +124,4 @@ SAMI.on('error', function(error) {
 
 # License
 
-[PocketSphinx](https://github.com/syl22-00/pocketsphinx.js) is released under the MIT License.
-
-SAMI is released under the MIT License.
+PocketSphinx is released under the BSD License. PocketSphinx.js is released under the MIT License. SAMI is released under the MIT License.
