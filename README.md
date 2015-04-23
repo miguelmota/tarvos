@@ -124,4 +124,8 @@ SAMI.on('error', function(error) {
 
 # License
 
-PocketSphinx is released under the BSD License. PocketSphinx.js is released under the MIT License. SAMI is released under the MIT License.
+PocketSphinx is released under the BSD License.
+
+PocketSphinx.js is released under the MIT License.
+
+SAMI is released under the MIT License.
