@@ -1,0 +1,22 @@
+{
+  "name": "sami",
+  "version": "0.0.0",
+  "description": "# License",
+  "main": "sami.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelmota/SAMI"
+  },
+  "author": "Miguel Mota <hello@miguelmota.com> (http://www.miguelmota.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miguelmota/SAMI/issues"
+  },
+  "homepage": "https://github.com/miguelmota/SAMI"
+}

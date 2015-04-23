@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=yes">
+  <title>SAMI</title>
+</head>
+<body>
+    <h2>SAMI</h2>
+    <ul>
+      <li>Press "Start" and speak</li>
+    </ul>
+    <select id="grammars"></select>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+    <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
+    <h2>Recognition Output</h2>
+    <div id="output" style="height:150px;overflow:auto;" >
+    </div>
+    <h2>Status</h2>
+    <div id="current-status">Loading page</div>
+
+  <script src="../lib/pocketsphinx/audioRecorder.js"></script>
+  <script src="../lib/pocketsphinx/callbackManager.js"></script>
+  <script src="../sami.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
