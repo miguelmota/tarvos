@@ -51,58 +51,13 @@
     }
 
     /**
-     * on
+     * main
+     * @desc Main init function.
      */
-    function on(name, fn) {
-      if (typeof fn !== 'function') {
-        throw new TypeError('Second argument for "on" method must be a function.');
-      }
-      (g_observableCallbacks[name] = g_observableCallbacks[name] || []).push(fn);
-    }
-
-    /**
-     * one
-     */
-    function one(name, fn) {
-      fn.one = true;
-      return on(name, fn);
-    }
-
-    /**
-     * off
-     */
-    function off(name, fn) {
-      if (name === '*') return (g_observableCallbacks = {}, g_observableCallbacks);
-      if (!g_observableCallbacks[name]) return;
-      if (fn) {
-        if (typeof fn !== 'function') {
-          throw new TypeError('Second argument for "off" method must be a function.');
-        }
-        g_observableCallbacks[name] = g_observableCallbacks[name].map(function(fm, i) {
-          if (fm === fn) {
-            g_observableCallbacks[name].splice(i, 1);
-          }
-        });
-      } else {
-        delete g_observableCallbacks[name];
-      }
-    }
-
-    /**
-     * trigger
-     */
-    function trigger(name /*, args */) {
-      if (!g_observableCallbacks[name] || !_size(g_observableCallbacks[name])) return;
-      var args = _slice(arguments, 1);
-
-      g_observableCallbacks[name].forEach(function(fn, i) {
-        if (fn) {
-          fn.apply(fn, args);
-          if (fn.one) {
-            g_observableCallbacks[name].splice(i, 1);
-          }
-        }
-      });
+    function main() {
+      g_callbackManager = new CallbackManager();
+      g_recognizer = spawnWorker(g_libPath + '/recognizer.js', recognizerLoaded);
+      getAudio();
     }
 
     /**
@@ -259,16 +214,6 @@
       options = options || {};
 
       g_libPath = options.libPath || './lib/pocketsphinx';
-    }
-
-    /**
-     * main
-     * @desc Main init function.
-     */
-    function main() {
-      g_callbackManager = new CallbackManager();
-      g_recognizer = spawnWorker(g_libPath + '/recognizer.js', recognizerLoaded);
-      getAudio();
     }
 
     /**
@@ -438,6 +383,61 @@
      */
     function setActivateKeyword(keyword) {
       g_activateKeyword = keyword;
+    }
+
+    /**
+     * on
+     */
+    function on(name, fn) {
+      if (typeof fn !== 'function') {
+        throw new TypeError('Second argument for "on" method must be a function.');
+      }
+      (g_observableCallbacks[name] = g_observableCallbacks[name] || []).push(fn);
+    }
+
+    /**
+     * one
+     */
+    function one(name, fn) {
+      fn.one = true;
+      return on(name, fn);
+    }
+
+    /**
+     * off
+     */
+    function off(name, fn) {
+      if (name === '*') return (g_observableCallbacks = {}, g_observableCallbacks);
+      if (!g_observableCallbacks[name]) return;
+      if (fn) {
+        if (typeof fn !== 'function') {
+          throw new TypeError('Second argument for "off" method must be a function.');
+        }
+        g_observableCallbacks[name] = g_observableCallbacks[name].map(function(fm, i) {
+          if (fm === fn) {
+            g_observableCallbacks[name].splice(i, 1);
+          }
+        });
+      } else {
+        delete g_observableCallbacks[name];
+      }
+    }
+
+    /**
+     * trigger
+     */
+    function trigger(name /*, args */) {
+      if (!g_observableCallbacks[name] || !_size(g_observableCallbacks[name])) return;
+      var args = _slice(arguments, 1);
+
+      g_observableCallbacks[name].forEach(function(fn, i) {
+        if (fn) {
+          fn.apply(fn, args);
+          if (fn.one) {
+            g_observableCallbacks[name].splice(i, 1);
+          }
+        }
+      });
     }
 
     setTimeout(main, 0);
