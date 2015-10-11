@@ -2,9 +2,9 @@
   'use strict';
 
   /**
-   * SAMI
+   * Tarvos
    */
-  var SAMI = (function() {
+  var Tarvos = (function() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -65,12 +65,12 @@
      */
     function initRecognizer() {
       // You can pass parameters to the recognizer,
-      // such as : {command: 'initialize', data: [["-hmm", "my_model"], ["-fwdflat", "no"]]}
+      // such as : {command: 'initialize', data: [['-hmm', 'my_model'], ['-fwdflat', 'no']]}
       postRecognizerJob({
         command: 'initialize',
         data: [
           // Threshold for p(hyp)/p(alternatives) ratio
-          ["-kws_threshold", "2"]
+          ['-kws_threshold', '2']
         ]
       }, initCallback);
 
@@ -89,6 +89,7 @@
      */
     function recognizerLoaded(recognizer) {
       recognizer.onmessage = function(event) {
+        console.log('mssag', event.data)
         if (_hasOwnProperty(event.data, 'id')) {
           var callback = g_callbackManager.get(event.data.id);
           var data = {};
@@ -103,6 +104,7 @@
         // New hypothesis
         if (_hasOwnProperty(event.data, 'hyp')) {
           var hyp = event.data.hyp;
+          console.log('here', event.data)
           var isFinal = false;
           if (_hasOwnProperty(event.data, 'final')) {
             isFinal = event.data.final;
@@ -209,11 +211,13 @@
 
     /**
      * config
+     * @parm {object} options
+     * @parm {string} options.pocketsphinxPath - Path to PocketSphinx.js directory
      */
     function config(options) {
       options = options || {};
 
-      g_libPath = options.libPath || './lib/pocketsphinx';
+      g_libPath = options.pocketsphinxPath || './lib/pocketsphinx';
     }
 
     /**
@@ -458,14 +462,64 @@
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = SAMI;
+      exports = module.exports = Tarvos;
     }
-    exports.SAMI = SAMI;
+    exports.Tarvos = Tarvos;
   } else if (typeof define === 'function' && define.amd) {
     define([], function() {
-      return SAMI;
+      return Tarvos;
     });
   } else {
-    root.SAMI = SAMI;
+    root.Tarvos = Tarvos;
   }
 })(this);
+Tarvos.config({ pocketsphinxPath: '/client/vendor/pocketsphinx' });Tarvos.__compiledVocabulary = [
+  [
+    "OKAY",
+    "OW K EY"
+  ],
+  [
+    "TARVOS",
+    "T AA R V AA S"
+  ],
+  [
+    "TARVOS(2)",
+    "T AA R V OW Z"
+  ],
+  [
+    "NAVIGATE",
+    "N AE V AH G EY T"
+  ],
+  [
+    "TO",
+    "T UW"
+  ],
+  [
+    "TO(2)",
+    "T IH"
+  ],
+  [
+    "TO(3)",
+    "T AH"
+  ],
+  [
+    "DASHBOARD",
+    "D AE SH B AO R D"
+  ],
+  [
+    "SETTINGS",
+    "S EH T IH NG Z"
+  ],
+  [
+    "GO",
+    "G OW"
+  ],
+  [
+    "HOME",
+    "HH OW M"
+  ],
+  [
+    "PAGE",
+    "P EY JH"
+  ]
+];Tarvos.addWords(Tarvos.__compiledVocabulary);

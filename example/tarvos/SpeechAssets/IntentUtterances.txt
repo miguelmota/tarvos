@@ -1,0 +1,7 @@
+WakeKeywordIntent okay tarvos
+
+NavigateIntent navigate to dashboard
+NavigateIntent navigate to settings
+NavigateIntent go to dashboard
+NavigateIntent go to settings
+NavigateIntent go to home page

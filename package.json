@@ -1,8 +1,8 @@
 {
-  "name": "sami",
+  "name": "tarvos",
   "version": "0.0.0",
   "description": "# License",
-  "main": "sami.js",
+  "main": "index.js",
   "directories": {
     "example": "example"
   },
@@ -11,12 +11,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/miguelmota/SAMI"
+    "url": "https://github.com/miguelmota/tarvos"
   },
   "author": "Miguel Mota <hello@miguelmota.com> (http://www.miguelmota.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/miguelmota/SAMI/issues"
+    "url": "https://github.com/miguelmota/tarvos/issues"
   },
-  "homepage": "https://github.com/miguelmota/SAMI"
+  "homepage": "https://github.com/miguelmota/tarvos",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "cmusphinxdict": "0.0.8",
+    "concat-stream": "^1.5.0",
+    "intent-utterance-file-parser": "0.0.3",
+    "lodash": "^3.10.1",
+    "minimist": "^1.2.0"
+  },
+  "bin": {
+    "tarvos": "bin/index.js"
+  },
+  "preferGlobal": "true"
 }

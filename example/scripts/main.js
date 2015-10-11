@@ -1,10 +1,4 @@
-SAMI.config({
-  libPath: '../../lib/pocketsphinx'
-});
-
-SAMI.addWords([['OKAY', 'OW K EY'], ['WEBSITE', 'W EH B S AY T'], ['HELLO', 'HH AH L OW'], ['HELLO(2)', 'HH EH L OW'], ['WORLD', 'W ER L D'], ['GOOGLE', 'G UW G AH L'], ['ACORNS', 'EY K AO R N Z'], ['GO', 'G OW'], ['TO', 'T UW'], ['SETTINGS', 'S EH T IH NG Z'], ['DASHBOARD', 'D AE SH B AO R D'], ['NAVIGATE', 'N AE V AH G EY T'], ['SAMI', 'S AE M IY']]);
-
-SAMI.addGrammars([
+Tarvos.addGrammars([
   {
     title: 'NAVIGATE',
     g: {
@@ -23,43 +17,44 @@ SAMI.addGrammars([
   }
 ]);
 
-SAMI.addKeywords([
+Tarvos.addKeywords([
   {
-    title: 'OKAY_SAMI',
-    g: 'OKAY SAMI'
+    title: 'OKAY_TARVOS',
+    g: 'OKAY TARVOS'
   }
 ]);
 
-SAMI.setActivateKeyword('OK_SAMI');
+Tarvos.setActivateKeyword('OKAY_TARVOS');
 
-SAMI.on('ready', function() {
+Tarvos.on('ready', function() {
   console.log('Ready');
   updateGrammars();
   startBtn.disabled = stopBtn.disabled = false;
-  var keywordIds = SAMI.getKeywordIds();
+  var keywordIds = Tarvos.getKeywordIds();
   selectTag.querySelector('[value="'+keywordIds[0].id+'"]').selected = true;
   startRecording();
 });
 
-SAMI.on('recognizerReady', function() {
+Tarvos.on('recognizerReady', function() {
   console.log('recognizer ready');
   updateStatus('Recognizer ready');
 });
 
-SAMI.on('recorderReady', function() {
+Tarvos.on('recorderReady', function() {
   console.log('Audio recorder ready');
   updateStatus('Audio recorder ready');
 });
 
-SAMI.on('activate', function() {
+Tarvos.on('activate', function() {
   console.log('Activated');
 });
 
-SAMI.on('hyp', function(hyp, isFinal) {
-  var keywordIds = SAMI.getKeywordIds();
-  var grammarIds = SAMI.getGrammarIds();
+Tarvos.on('hyp', function(hyp, isFinal) {
+  var keywordIds = Tarvos.getKeywordIds();
+  var grammarIds = Tarvos.getGrammarIds();
+  console.log('hyp', hyp)
 
-  if (hyp === 'OKAY SAMI') {
+  if (hyp === 'OKAY TARVOS') {
     selectTag.querySelector('[value="'+grammarIds[0].id+'"]').selected = true;
     stopRecording();
     startRecording();
@@ -79,27 +74,27 @@ SAMI.on('hyp', function(hyp, isFinal) {
   }
 });
 
-SAMI.on('error', function(error) {
+Tarvos.on('error', function(error) {
   console.error(error);
 });
 
 function startRecording() {
   var grammarId = document.getElementById('grammars').value;
-  if (SAMI.listen(grammarId)) {
+  if (Tarvos.listen(grammarId)) {
     displayRecording(true);
   }
   updateStatus('Ready and listening');
 }
 
 function stopRecording() {
-  SAMI.stopListening();
+  Tarvos.stopListening();
   displayRecording(false);
   updateStatus('Stopped listening');
 }
 
 function updateGrammars() {
-  var grammarIds = SAMI.getGrammarIds();
-  var keywordIds = SAMI.getKeywordIds();
+  var grammarIds = Tarvos.getGrammarIds();
+  var keywordIds = Tarvos.getKeywordIds();
   var el;
   var i;
   for (i = 0 ; i < grammarIds.length ; i++) {

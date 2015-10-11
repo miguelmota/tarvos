@@ -1,0 +1,12 @@
+{
+  "intentUtterances": {
+    "src":  "../SpeechAssets/IntentUtterances.txt"
+  },
+  "vocabulary": {
+    "pronouncingDictionary": "../SpeechAssets/pronouncingDictionary.json",
+    "dist": "../SpeechAssets/vocabulary.json"
+  },
+  "bundle": {
+    "dist": "../../scripts/tarvos.bundle.js"
+  }
+}
